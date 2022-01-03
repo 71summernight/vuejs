@@ -1,22 +1,18 @@
 
 <template>
-  <Modal />
+  <Modal  @close="isOpen=false" :oneRooms="oneRooms" :isOpen="isOpen" :clickRoomsNumber="clickRoomsNumber" />
   <div class="menu">
     <a  v-for="a in menu" :key="a">{{a}}</a>  
   </div>
-  <Discount ></Discount>
-  <div  @click="isOpen=true; clickRoomsNumber=i" v-for="(a,i) in oneRooms" :key="i">
-      <img class="room-img" :src="oneRooms[i].image" />
-      <h4>{{oneRooms[i].title}}</h4>
-      <p>{{oneRooms[i].price}}원</p>
-  </div>
-
+  <Card v-for="(a,i) in oneRooms" :key="i" :oneRooms="oneRooms[i]" @openModal="isOpen=true; clickRoomsNumber=i" />
+  <Discount></Discount>
 </template>
 
 <script>
 import data from './assets/data.js';
 import Discount from "././components/Discount.vue";
 import Modal from "././components/Modal.vue";
+import Card from "././components/Card.vue"
 
 export default {
   name: 'App',
@@ -28,7 +24,6 @@ export default {
       count:[0,0,0],
       menu:["HOME","SHOP","ABOUT"],
       products:["역삼동원룸","천호동원룸","마포구원룸"],
-
     }
   },
   methods:{
@@ -37,6 +32,7 @@ export default {
   components: {
     Discount : Discount,
     Modal:Modal,
+    Card:Card,
   }
 }
 </script>
