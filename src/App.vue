@@ -1,48 +1,29 @@
+
 <template>
-  <div class="black-bg" v-if="isOpen===true">
-      <div class="white-bg">
-        <h4>상세페이지임</h4>
-        <h4>상세페이지 내용임</h4>
-      </div>
-  </div>
-
-
+  <Modal />
   <div class="menu">
     <a  v-for="a in menu" :key="a">{{a}}</a>  
   </div>
-
-  <div>
-      <img class="room-img" src="https://i1.wp.com/www.gangnamoneroom.com/wp-content/uploads/2019/08/cdpc.jpg?resize=480%2C360" />
-      <h4 @click="isOpen=true">{{products[0]}}</h4>
-      <p>50만원</p>
-      <button @click="count[0]++">허위매물신고</button>
-      <span>신고수: {{count[0]}}</span>
-
+  <Discount ></Discount>
+  <div  @click="isOpen=true; clickRoomsNumber=i" v-for="(a,i) in oneRooms" :key="i">
+      <img class="room-img" :src="oneRooms[i].image" />
+      <h4>{{oneRooms[i].title}}</h4>
+      <p>{{oneRooms[i].price}}원</p>
   </div>
 
-    <div>
-      <img class="room-img" src="https://t1.daumcdn.net/liveboard/himartlifestyle/c6eeff73256a40f3babee8b04be70ec7.JPG" />
-      <h4>{{products[1]}}</h4>
-      <p>50만원</p>
-      <button @click="count[1]++">허위매물신고</button>
-      <span>신고수: {{count[1]}}</span>
-  </div>
-
-    <div>
-        <img class="room-img" src="https://t1.daumcdn.net/liveboard/himartlifestyle/c6eeff73256a40f3babee8b04be70ec7.JPG" />
-        <h4>{{products[2]}}</h4>
-        <p>50만원</p>
-        <button @click="count[2]++">허위매물신고</button>
-        <span>신고수 :{{count[2]}}</span>
-  </div>
 </template>
 
 <script>
+import data from './assets/data.js';
+import Discount from "././components/Discount.vue";
+import Modal from "././components/Modal.vue";
 
 export default {
   name: 'App',
   data(){
     return{
+      clickRoomsNumber:0,
+      oneRooms:data,
       isOpen:false,
       count:[0,0,0],
       menu:["HOME","SHOP","ABOUT"],
@@ -51,12 +32,11 @@ export default {
     }
   },
   methods:{
-    increase(){
-
-    }
   },
 
   components: {
+    Discount : Discount,
+    Modal:Modal,
   }
 }
 </script>
@@ -69,12 +49,20 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
 body{
   margin:0
 }
 
 div{
   box-sizing: border-box;
+}
+
+.discount{
+  background-color: "#eeee";
+  padding:10px;
+  margin:10px;
+  border-radius:5px;
 }
 
 .black-bg{
