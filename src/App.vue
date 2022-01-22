@@ -17,6 +17,7 @@ import Card from "././components/Card.vue"
 export default {
   name: 'App',
   data(){
+    //변수자리
     return{
       clickRoomsNumber:0,
       oneRooms:data,
@@ -27,9 +28,11 @@ export default {
     }
   },
   methods:{
+    //함수자리
   },
 
   components: {
+    //컴포넌트 임폴트
     Discount : Discount,
     Modal:Modal,
     Card:Card,
