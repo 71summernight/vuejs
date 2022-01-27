@@ -11,6 +11,8 @@
   </div>
   <Card v-for="(a,i) in oneRooms" :key="i" :oneRooms="oneRooms[i]" @openModal="isOpen=true" clickRoomsNumber="i" />
   <Discount></Discount>
+
+  <button @click="priceSort" >가격순 정렬</button>
 </template>
 
 <script>
@@ -34,6 +36,11 @@ export default {
   },
   methods:{
     //함수자리
+    priceSort(){
+      this.oneRooms.sort(function(a,b){
+        return a.price-b.price;
+      })
+    }
   },
 
   components: {
