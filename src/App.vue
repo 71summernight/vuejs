@@ -1,10 +1,15 @@
 
 <template>
+<!-- <div  class="start" :class="{end : isOpen}">  -->
+  <!-- :calss="{밑에서 끝점 애니매이션 : 오른쪽은 true일때 실행 isOpen이 true}-->
+<transition name="fade">
   <Modal  @close="isOpen=false" :oneRooms="oneRooms" :isOpen="isOpen" :clickRoomsNumber="clickRoomsNumber" />
+  <!-- </div> -->
+</transition>
   <div class="menu">
     <a  v-for="a in menu" :key="a">{{a}}</a>  
   </div>
-  <Card v-for="(a,i) in oneRooms" :key="i" :oneRooms="oneRooms[i]" @openModal="isOpen=true; clickRoomsNumber=i" />
+  <Card v-for="(a,i) in oneRooms" :key="i" :oneRooms="oneRooms[i]" @openModal="isOpen=true" clickRoomsNumber="i" />
   <Discount></Discount>
 </template>
 
@@ -62,6 +67,26 @@ div{
   padding:10px;
   margin:10px;
   border-radius:5px;
+}
+
+/* .start{
+  opacity:0;
+  transition: all 1s;
+}
+.end{
+  opacity:1;
+} */
+
+.fade-enter-from{
+  opacity: 0;
+}
+
+.fade-enter-active{
+  transition: all 1s;
+}
+
+.fade-enter-to{
+  opacity:1;
 }
 
 .black-bg{
