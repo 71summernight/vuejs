@@ -9,10 +9,12 @@
   <div class="menu">
     <a  v-for="a in menu" :key="a">{{a}}</a>  
   </div>
+  <Discount v-if="showDiscount===true" />
   <Card v-for="(a,i) in oneRooms" :key="i" :oneRooms="oneRooms[i]" @openModal="isOpen=true" clickRoomsNumber="i" />
-  <Discount></Discount>
 
-  <button @click="priceSort" >가격순 정렬</button>
+  <button @click="priceSort" >가격순 정렬</button>  
+  <button @click="priceBack" >되돌리기</button>
+
 </template>
 
 <script>
@@ -26,6 +28,8 @@ export default {
   data(){
     //변수자리
     return{
+      showDiscount:true,
+      onRoomOrigin:[...data],
       clickRoomsNumber:0,
       oneRooms:data,
       isOpen:false,
@@ -40,8 +44,12 @@ export default {
       this.oneRooms.sort(function(a,b){
         return a.price-b.price;
       })
+    },
+    priceBack(){
+      this.oneRooms=this.onRoomOrigin;
     }
   },
+
 
   components: {
     //컴포넌트 임폴트

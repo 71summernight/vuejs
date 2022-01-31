@@ -17,7 +17,7 @@ export default {
     name:"Modal",
     data(){
         return{
-            month:1,
+            month:3,
         }
     },
     watch:{
@@ -27,6 +27,13 @@ export default {
                 this.month=1;
             }
         },
+    },
+
+    updated(){
+        if(this.month<=2){
+            alert("3개월부터 받습니다.")
+            this.month=3
+        }
     },
 
     props:{
